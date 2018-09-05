@@ -1,0 +1,260 @@
+Codecademy: Data Science
+========================
+1.1) Introduction to Data Science:
+  -SQL
+  -Python: pandas, matplotlib
+  -Jupyter Notebook
+  -A/B Tests: significance
+  -Python is an interpreted high-level programming language for general-purpose programming
+1.2) Introduction to SQL:
+  -SQL: Structured Query Language
+  -RDBMS: Relational Database Management System
+  -CREATE TABLE table_name (
+      column_1 data_type, 
+      column_2 data_type, 
+      column_3 data_type
+  );
+  -INSERT INTO celebs (id, name, age) 
+  VALUES (1, 'Justin Bieber', 21);
+  -SELECT name FROM celebs;
+  -SELECT * FROM celebs;
+  -UPDATE celebs
+  SET age = 22
+  WHERE id = 1;
+  -ALTER TABLE celebs 
+  ADD COLUMN twitter_handle TEXT;
+  -NULL: a special value in SQL that represents missing or unknown data.
+  -DELETE FROM celebs 
+  WHERE twitter_handle IS NULL;
+  -Constraints that add information about how a column can be used are invoked after specifying the data type for a column. They can be used to tell the database to reject inserted data that does not adhere to a certain restriction.
+  CREATE TABLE celebs (
+      id INTEGER PRIMARY KEY, 
+      name TEXT UNIQUE,
+      date_of_birth TEXT NOT NULL,
+      date_of_death TEXT DEFAULT 'Not Applicable',
+  );
+2.1) Writing Queries
+  -SELECT DISTINCT year
+       FROM movies;
+  -SELECT *
+      FROM movies
+  WHERE imdb_rating<5;
+  
+  -SELECT * 
+    FROM movies
+  WHERE name LIKE 'Se_en';
+  -The _ means you can substitute any individual character here without breaking the pattern.
+  -SELECT * 
+    FROM movies
+  WHERE name LIKE 'A%';
+  -% is a wildcard character that matches zero or more missing letters in the pattern.
+  -SELECT name
+      FROM movies
+  WHERE imdb_rating IS NULL;
+  -It is not possible to test for NULL values with comparison operators, such as = and !=. Instead, we will have to use these operators: IS NULL and IS NOT NULL
+  -SELECT *
+    FROM movies
+  WHERE name BETWEEN 'A' AND 'J';
+  -BETWEEN two letters is not inclusive of the 2nd letter.
+  -BETWEEN two numbers is inclusive of the 2nd number.
+  -SELECT *
+     FROM movies
+   WHERE imdb_rating > 8
+   ORDER BY year DESC;
+  -ORDER BY is a clause that indicates you want to sort the result set by a particular column.
+3.1) Aggregate Functions:
+  -SELECT COUNT(*)
+     FROM table_name;
+  -SELECT SUM(downloads)
+       FROM fake_apps;
+  -SELECT MAX(downloads)
+       FROM fake_apps;
+  -SELECT MIN(downloads)
+      FROM fake_apps;
+  -SELECT AVG(price)
+    FROM fake_apps;
+  -SELECT ROUND(AVG(price), 2)
+      FROM fake_apps;
+  -SELECT price, COUNT(downloads)
+       FROM fake_apps
+   GROUP BY price;
+  -SELECT category, 
+      SUM(downloads)
+       FROM fake_apps
+  GROUP BY category;
+  -SELECT ROUND(imdb_rating),
+        COUNT(name)
+     FROM movies
+  GROUP BY 1
+   ORDER BY 1;
+  -SELECT year,
+        genre,
+        COUNT(name)
+    FROM movies
+  GROUP BY 1, 2
+      HAVING COUNT(name) > 10;
+  -Use HAVING when limiting the results of a query based on an aggregate property: filter groups.
+2.2) Multiple Tables
+  -INNER JOIN: will combine rows from different tables if the join condition is true.
+    SELECT *
+    FROM orders
+    JOIN customers
+      ON orders.customer_id = customers.customer_id;
+  -LEFT JOIN: will return every row in the left table, and if the join condition is not met, NULL values are used to fill in the columns from the right table.
+    SELECT *
+    FROM table1
+    LEFT JOIN table2
+          ON table1.c2 = table2.c2;
+  -PRIMARY KEY: a column that uniquely identifies each row of that table.
+  -FOREIGN KEY: a column that contains the primary key to another table.
+  -CROSS JOIN: combine all rows of one table with all rows of another table. Notice that cross joins don't require an ON statement. You're not really joining on any columns!
+A more common usage of CROSS JOIN is when we need to compare each row of a table to a list of values.
+    SELECT shirts.shirt_color,
+          pants.pants_color
+    FROM shirts
+    CROSS JOIN pants;
+  -UNION: Sometimes we just want to stack one dataset on top of the other. 1) Same number of columns. 2) Same datatype in the same order as the first table.
+    SELECT *
+    FROM table1
+    UNION
+    SELECT *
+    FROM table2;
+  -WITH: Often times, we want to combine two tables, but one of the tables is the result of another calculation.
+    WITH previous_results AS (
+      SELECT ...
+      ...
+      ...
+      ...
+    )
+    SELECT *
+    FROM previous_results
+    JOIN customers
+      ON _____ = _____;
+4.1) Python: Introduction
+  -Comments: #
+  -print("Hello Sekai!")
+  -Strings: "Kurama" or 'Kurama'
+  -Variables: message_string = "Hola"
+  -Errors: SyntaxError, NameError, IndexError, ZeroDivisionError
+  -Numbers: int, float, complex
+    num_int= 8
+    num_float=7.36
+    num_complex=4.2j
+  -Math operations: PEMDAS, 左 - ->右
+  -Exponents: **| 6**3= 6^3
+  -Modulo: The modulo (%) operator is useful in programming when we want to perform an action every nth-time the code is run.
+  -Multi-line strings/comments: """comment""" or '''comment'''
+    "If a multi-line string isn't assigned a variable or used in an expression it is treated as a comment."
+4.2) Python Functions:
+      -Syntax:
+          def function_name():
+            some_code
+      -Keyword arguments: assigned explicitly in the function definition
+         def create_spreadsheet(title, row_count=1000):
+             print("Creating a spreadsheet called "+title+" with "+str(row_count)+" rows")
+         create_spreadsheet("Downloads")
+         create_spreadsheet("Applications", row_count=10)
+                "Creating a spreadsheet called Downloads with 1000 rows"
+                "Creating a spreadsheet called Applications with 10 rows"
+       -Multiple returns:
+           def square_point(x_value, y_value):
+              x_2 = x_value * x_value
+              y_2 = y_value * y_value
+              return x_2, y_2
+           x_squared, y_squared = square_point(1, 3)
+       -Scope: Places in code where the variable is defined (can be used)
+
+4.3) Python Control Flow:
+  -Boolean Expressions: True or False
+  -Relational Operators: ==, !=, >, <, >=, <=
+  -if condition: 
+        statement_if
+    elif (condition_elif):
+      statement_elif
+    else:
+            statement_else
+  -Boolean operators: and, or, not
+  -Exceptions/Error control:
+    try:
+      # some statement
+    except ErrorName:
+      # some statement
+    def divides(a,b):
+        try:
+            result = a / b
+            print (result)
+        except ZeroDivisionError:
+            print ("Can't divide by zero!")
+
+5.2) Python Loops
+  -For Loop: lets us perform an action on each item in a list.
+  for <temporary variable> in <list variable>:
+    <action>
+  -Break: When the program hits a break statement, control returns to the code outside of the for loop.
+  for item in items_on_sale:
+  if item == "knit_dress":
+    print("Knit Dress is on sale!")
+    break
+  -Continue: moves the index to the next value in the list, without executing the code in the rest of the loop.
+  ages = [12, 38, 34, 26, 21, 19, 67, 41, 17]
+  for age in ages:
+    if age < 21:
+      continue
+    print(age)
+  -While: The while loop performs a set of code until some condition is reached.
+  index = 0
+  while index < len(dog_breeds):
+    print(dog_breeds[index])
+    index += 1
+  -List Comprehensions: 
+  words = ["@coolguy35", "#nofilter", "@kewldawg54", "reply", "timestamp", "@matchamom", "follow", "#updog"]
+  usernames = [word for word in words if word[0] == '@']
+  ["@coolguy35", "@kewldawg54", "@matchamom"]
+  
+
+Codecademy: Python
+==================
+1.3) Conditionals and Control flow:
+  - not is evaluated first;
+    and is evaluated next;
+    or is evaluated last.
+  -Input:
+  name = input("What's your name?")
+  print(name)
+  -String formating:
+  area=3.14159*radius**2
+  print("Circle area: {}".format(area))
+  -Imports:
+    Generic:
+      import math
+      print(math.sqrt(25))
+    Function:
+      from math import sqrt
+      print(sqrt(25))
+    Universal:
+      from math import *
+      print(pi)
+
+1.4) Lists and Dictionaries:
+  -Strings are lists!!:
+  animals = "catdogfrog"
+  cat = animals[:3]
+  >>> cat="cat"
+  -index() and insert()
+  animals = ["ant", "bat", "cat"]
+  print animals.index("bat")
+  animals.insert(1, "dog")
+  print animals
+  -Dictionaries:
+  residents = {'Puffin' : 104, 'Sloth' : 105, 'Burmese Python' : 106}
+  print(residents['Sloth'])
+  >>> 105
+    -Delete value:
+    del dict_name[key_name]
+    -Associate value:
+    dict_name[key]=new_value
+  -Remove from list:
+  beatles = ["john","paul","george","ringo","stuart"]
+  beatles.remove("stuart")  # this modifies the list (no return value)
+
+1.5) 
