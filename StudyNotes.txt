@@ -255,6 +255,16 @@ Codecademy: Python
     dict_name[key]=new_value
   -Remove from list:
   beatles = ["john","paul","george","ringo","stuart"]
-  beatles.remove("stuart")  # this modifies the list (no return value)
+  beatles.remove("stuart")  # this modifies the list (no return value) - uses list element
+  beatles.pop(1) # uses the index
+  -Continuation character:
+  The \ character is a continuation character. The following line is considered a continuation of the current line.
 
-1.5) 
+1.5) Loops:
+  -While/else is similar to if/else, but there is a difference: the else block will execute anytime the loop condition is evaluated to False. 
+  -For/else is similar to while/else
+    if condition:
+      handle_true()
+    else:
+      handle_false()
+  
