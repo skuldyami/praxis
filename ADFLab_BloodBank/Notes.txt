@@ -1,0 +1,54 @@
+DataBase: BANCOSANGRE
+
+TABLES:
+>>>>>>>
+-Persona:
+=========
+id nombre apellido doc tiposangre_id fe_nac tel email
+
+-TipoSangre:
+============
+id tp_abo tp_rh
+
+-TipoDonacion:
+==============
+id nombre     
+
+ex: 
+1  (Whole Blood) [Sangre Total]
+2  (Red Blood Cells) [Glóbulos Rojos]
+3  (Platelets) [Plaquetas]
+4  (Plasma)
+5  (Granulocytes) [Granulocitos]
+
+-Banco:
+=======
+id persona_id donacion_id cantidad_en_ml fe_donacion fe_expiracion
+
+
+ACTIONS:
+>>>>>>>>
+1) CRUD Persona
+2) CRUD BancoSangre
+
+
+LINKS:
+>>>>>>
+-) https://www.youtube.com/watch?v=cH7Ol9_oHfM
+-) https://www.youtube.com/watch?v=ZWzgBiHc7VQ
+-) http://www.catgovind.com/oracle-adf-tutorial-12c/
+-) https://www.youtube.com/watch?v=GAsCwlGlGAw
+-) https://www.w3resource.com/oracle/oracle-data-types.php
+-) http://bca.coop/products-services/blood-products/plasma/
+
+
+
+/////
+PLAN:
+\\\\\
+1) Download & Install & Test Oracle Express
+2) Create table schemas
+3) Create BANCOSANGRE with its tables
+4) Add Data to tables and test
+5) Create simple ADF app
+6) Create controller and views and link everything (most unknown)
