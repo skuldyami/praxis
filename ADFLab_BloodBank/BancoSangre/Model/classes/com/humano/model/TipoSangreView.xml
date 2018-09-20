@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TipoSangreView"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  SelectList="TipoSangre.ID, 
+       TipoSangre.TP_ABO, 
+       TipoSangre.TP_RH"
+  FromList="TIPO_SANGRE TipoSangre"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full">
+  <EntityUsage
+    Name="TipoSangre"
+    Entity="com.humano.model.TipoSangre"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="TipoSangre"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="TpAbo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TpAbo"
+    EntityUsage="TipoSangre"
+    AliasName="TP_ABO"/>
+  <ViewAttribute
+    Name="TpRh"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TpRh"
+    EntityUsage="TipoSangre"
+    AliasName="TP_RH"/>
+  <ViewLinkAccessor
+    Name="PersonaView"
+    ViewLink="com.humano.model.FkTipoSangreLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>
