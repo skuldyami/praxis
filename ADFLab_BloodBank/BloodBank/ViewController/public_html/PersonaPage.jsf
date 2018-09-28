@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <af:document title="PersonaPage.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/oracle/templates/threeColumnTemplate.jspx" id="pt1">
+                <f:facet name="center">
+                    <af:panelSplitter id="ps1" orientation="vertical">
+                        <f:facet name="first">
+                            <af:panelCollection id="pc1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <af:table value="#{bindings.BancoSangreView2.collectionModel}" var="row"
+                                          rows="#{bindings.BancoSangreView2.rangeSize}"
+                                          emptyText="#{bindings.BancoSangreView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.BancoSangreView2.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.BancoSangreView2.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.BancoSangreView2.rangeSize}"
+                                          filterModel="#{bindings.BancoSangreView2Query.queryDescriptor}"
+                                          queryListener="#{bindings.BancoSangreView2Query.processQuery}"
+                                          filterVisible="true" varStatus="vs" id="t1" columnSelection="single">
+                                    <af:column sortProperty="#{bindings.BancoSangreView2.hints.Id.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.BancoSangreView2.hints.Id.label}" id="c1">
+                                        <af:outputText value="#{row.Id}"
+                                                       shortDesc="#{bindings.BancoSangreView2.hints.Id.tooltip}"
+                                                       id="ot1">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.BancoSangreView2.hints.Id.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.BancoSangreView2.hints.PersonaId.label}" id="c2">
+                                        <af:selectOneChoice value="#{row.bindings.PersonaId.inputValue}"
+                                                            label="#{row.bindings.PersonaId.label}"
+                                                            readOnly="true"
+                                                            required="#{bindings.BancoSangreView2.hints.PersonaId.mandatory}"
+                                                            shortDesc="#{bindings.BancoSangreView2.hints.PersonaId.tooltip}"
+                                                            id="soc1">
+                                            <f:selectItems value="#{row.bindings.PersonaId.items}" id="si1"/>
+                                            <f:validator binding="#{row.bindings.PersonaId.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.BancoSangreView2.hints.TipoDonacionId.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.BancoSangreView2.hints.TipoDonacionId.label}"
+                                               id="c3">
+                                        <af:outputText value="#{row.TipoDonacionId}"
+                                                       shortDesc="#{bindings.BancoSangreView2.hints.TipoDonacionId.tooltip}"
+                                                       id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.BancoSangreView2.hints.TipoDonacionId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.BancoSangreView2.hints.CantidadEnMl.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.BancoSangreView2.hints.CantidadEnMl.label}"
+                                               id="c4">
+                                        <af:outputText value="#{row.CantidadEnMl}"
+                                                       shortDesc="#{bindings.BancoSangreView2.hints.CantidadEnMl.tooltip}"
+                                                       id="ot4">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.BancoSangreView2.hints.CantidadEnMl.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.BancoSangreView2.hints.FeDonacion.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.BancoSangreView2.hints.FeDonacion.label}" id="c5">
+                                        <f:facet name="filter">
+                                            <af:inputDate value="#{bindings.BancoSangreView2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FeDonacion.value}"
+                                                          id="id2">
+                                                <af:convertDateTime pattern="#{bindings.BancoSangreView2.hints.FeDonacion.format}"/>
+                                            </af:inputDate>
+                                        </f:facet>
+                                        <af:outputText value="#{row.FeDonacion}"
+                                                       shortDesc="#{bindings.BancoSangreView2.hints.FeDonacion.tooltip}"
+                                                       id="ot5">
+                                            <af:convertDateTime pattern="#{bindings.BancoSangreView2.hints.FeDonacion.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.BancoSangreView2.hints.FeExpiracion.name}"
+                                               filterable="true" sortable="true"
+                                               headerText="#{bindings.BancoSangreView2.hints.FeExpiracion.label}"
+                                               id="c6">
+                                        <f:facet name="filter">
+                                            <af:inputDate value="#{bindings.BancoSangreView2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FeExpiracion.value}"
+                                                          id="id3">
+                                                <af:convertDateTime pattern="#{bindings.BancoSangreView2.hints.FeExpiracion.format}"/>
+                                            </af:inputDate>
+                                        </f:facet>
+                                        <af:outputText value="#{row.FeExpiracion}"
+                                                       shortDesc="#{bindings.BancoSangreView2.hints.FeExpiracion.tooltip}"
+                                                       id="ot6">
+                                            <af:convertDateTime pattern="#{bindings.BancoSangreView2.hints.FeExpiracion.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                                <f:facet name="statusbar"/>
+                            </af:panelCollection>
+                        </f:facet>
+                        <f:facet name="second">
+                            <af:panelTabbed id="pt2">
+                                <af:showDetailItem text="showDetailItem 1" id="sdi3">
+                                    <af:panelFormLayout id="pfl2">
+                                        <af:inputText value="#{bindings.Id1.inputValue}"
+                                                      label="#{bindings.Id1.hints.label}"
+                                                      required="#{bindings.Id1.hints.mandatory}"
+                                                      columns="#{bindings.Id1.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Id1.hints.precision}"
+                                                      shortDesc="#{bindings.Id1.hints.tooltip}" id="it8">
+                                            <f:validator binding="#{bindings.Id1.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Id1.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.PersonaId.inputValue}"
+                                                      label="#{bindings.PersonaId.hints.label}"
+                                                      required="#{bindings.PersonaId.hints.mandatory}"
+                                                      columns="#{bindings.PersonaId.hints.displayWidth}"
+                                                      maximumLength="#{bindings.PersonaId.hints.precision}"
+                                                      shortDesc="#{bindings.PersonaId.hints.tooltip}" id="it9">
+                                            <f:validator binding="#{bindings.PersonaId.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.PersonaId.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.TipoDonacionId.inputValue}"
+                                                      label="#{bindings.TipoDonacionId.hints.label}"
+                                                      required="#{bindings.TipoDonacionId.hints.mandatory}"
+                                                      columns="#{bindings.TipoDonacionId.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TipoDonacionId.hints.precision}"
+                                                      shortDesc="#{bindings.TipoDonacionId.hints.tooltip}" id="it10">
+                                            <f:validator binding="#{bindings.TipoDonacionId.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TipoDonacionId.format}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.CantidadEnMl.inputValue}"
+                                                      label="#{bindings.CantidadEnMl.hints.label}"
+                                                      required="#{bindings.CantidadEnMl.hints.mandatory}"
+                                                      columns="#{bindings.CantidadEnMl.hints.displayWidth}"
+                                                      maximumLength="#{bindings.CantidadEnMl.hints.precision}"
+                                                      shortDesc="#{bindings.CantidadEnMl.hints.tooltip}" id="it11">
+                                            <f:validator binding="#{bindings.CantidadEnMl.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.CantidadEnMl.format}"/>
+                                        </af:inputText>
+                                        <af:inputDate value="#{bindings.FeDonacion.inputValue}"
+                                                      label="#{bindings.FeDonacion.hints.label}"
+                                                      required="#{bindings.FeDonacion.hints.mandatory}"
+                                                      columns="#{bindings.FeDonacion.hints.displayWidth}"
+                                                      shortDesc="#{bindings.FeDonacion.hints.tooltip}" id="id4">
+                                            <f:validator binding="#{bindings.FeDonacion.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FeDonacion.format}"/>
+                                        </af:inputDate>
+                                        <af:inputDate value="#{bindings.FeExpiracion.inputValue}"
+                                                      label="#{bindings.FeExpiracion.hints.label}"
+                                                      required="#{bindings.FeExpiracion.hints.mandatory}"
+                                                      columns="#{bindings.FeExpiracion.hints.displayWidth}"
+                                                      shortDesc="#{bindings.FeExpiracion.hints.tooltip}" id="id5">
+                                            <f:validator binding="#{bindings.FeExpiracion.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.FeExpiracion.format}"/>
+                                        </af:inputDate>
+                                        <f:facet name="footer">
+                                            <af:button text="Submit" id="b5"/>
+                                        </f:facet>
+                                    </af:panelFormLayout>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                        </f:facet>
+                    </af:panelSplitter>
+                </f:facet>
+                <f:facet name="header"/>
+                <f:facet name="start">
+                    <af:panelAccordion id="pa1">
+                        <af:showDetailItem text="Personas" id="sdi1">
+                            <af:panelFormLayout id="pfl1">
+                                <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                              required="#{bindings.Id.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Id.hints.displayWidth}"
+                                              maximumLength="#{bindings.Id.hints.precision}"
+                                              shortDesc="#{bindings.Id.hints.tooltip}" id="it1">
+                                    <f:validator binding="#{bindings.Id.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Nombre.inputValue}"
+                                              label="#{bindings.Nombre.hints.label}"
+                                              required="#{bindings.Nombre.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Nombre.hints.displayWidth}"
+                                              maximumLength="#{bindings.Nombre.hints.precision}"
+                                              shortDesc="#{bindings.Nombre.hints.tooltip}" id="it2">
+                                    <f:validator binding="#{bindings.Nombre.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Apellido.inputValue}"
+                                              label="#{bindings.Apellido.hints.label}"
+                                              required="#{bindings.Apellido.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Apellido.hints.displayWidth}"
+                                              maximumLength="#{bindings.Apellido.hints.precision}"
+                                              shortDesc="#{bindings.Apellido.hints.tooltip}" id="it3">
+                                    <f:validator binding="#{bindings.Apellido.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Documento.inputValue}"
+                                              label="#{bindings.Documento.hints.label}"
+                                              required="#{bindings.Documento.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Documento.hints.displayWidth}"
+                                              maximumLength="#{bindings.Documento.hints.precision}"
+                                              shortDesc="#{bindings.Documento.hints.tooltip}" id="it4">
+                                    <f:validator binding="#{bindings.Documento.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.TipoSangreId.inputValue}"
+                                              label="#{bindings.TipoSangreId.hints.label}"
+                                              required="#{bindings.TipoSangreId.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.TipoSangreId.hints.displayWidth}"
+                                              maximumLength="#{bindings.TipoSangreId.hints.precision}"
+                                              shortDesc="#{bindings.TipoSangreId.hints.tooltip}" id="it5">
+                                    <f:validator binding="#{bindings.TipoSangreId.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.TipoSangreId.format}"/>
+                                </af:inputText>
+                                <af:inputDate value="#{bindings.FeNac.inputValue}" readOnly="true"
+                                              label="#{bindings.FeNac.hints.label}"
+                                              required="#{bindings.FeNac.hints.mandatory}"
+                                              columns="#{bindings.FeNac.hints.displayWidth}"
+                                              shortDesc="#{bindings.FeNac.hints.tooltip}" id="id1">
+                                    <f:validator binding="#{bindings.FeNac.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.FeNac.format}"/>
+                                </af:inputDate>
+                                <af:inputText value="#{bindings.Tel.inputValue}" label="#{bindings.Tel.hints.label}"
+                                              required="#{bindings.Tel.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Tel.hints.displayWidth}"
+                                              maximumLength="#{bindings.Tel.hints.precision}"
+                                              shortDesc="#{bindings.Tel.hints.tooltip}" id="it6">
+                                    <f:validator binding="#{bindings.Tel.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label}"
+                                              required="#{bindings.Email.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Email.hints.displayWidth}"
+                                              maximumLength="#{bindings.Email.hints.precision}"
+                                              shortDesc="#{bindings.Email.hints.tooltip}" id="it7">
+                                    <f:validator binding="#{bindings.Email.validator}"/>
+                                </af:inputText>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                        <af:button actionListener="#{bindings.First.execute}" text="First"
+                                                   disabled="#{!bindings.First.enabled}" partialSubmit="true" id="b1"/>
+                                        <af:button actionListener="#{bindings.Previous.execute}" text="Previous"
+                                                   disabled="#{!bindings.Previous.enabled}" partialSubmit="true"
+                                                   id="b2"/>
+                                        <af:button actionListener="#{bindings.Next.execute}" text="Next"
+                                                   disabled="#{!bindings.Next.enabled}" partialSubmit="true" id="b3"/>
+                                        <af:button actionListener="#{bindings.Last.execute}" text="Last"
+                                                   disabled="#{!bindings.Last.enabled}" partialSubmit="true" id="b4"/>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:panelFormLayout>
+                        </af:showDetailItem>
+                        <af:showDetailItem text="Más información" id="sdi2">
+                            <dvt:pieGraph id="graph1" value="#{bindings.BancoSangreView1.graphModel}" subType="PIE"
+                                          shortDesc="Cantidad vs TipoDonacion">
+                                <dvt:background>
+                                    <dvt:specialEffects/>
+                                </dvt:background>
+                                <dvt:graphPieFrame/>
+                                <dvt:seriesSet>
+                                    <dvt:series/>
+                                </dvt:seriesSet>
+                                <dvt:sliceLabel/>
+                                <dvt:pieLabel rendered="true"/>
+                                <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                <dvt:attributeFormat name="TipoDonacionId" id="af1">
+                                    <af:convertNumber pattern="#{bindings.BancoSangreView1.hints.TipoDonacionId.format}"
+                                                      groupingUsed="false"/>
+                                </dvt:attributeFormat>
+                                <dvt:attributeFormat name="CantidadEnMl" id="af2">
+                                    <af:convertNumber pattern="#{bindings.BancoSangreView1.hints.CantidadEnMl.format}"
+                                                      groupingUsed="false"/>
+                                </dvt:attributeFormat>
+                            </dvt:pieGraph>
+                        </af:showDetailItem>
+                    </af:panelAccordion>
+                </f:facet>
+                <f:facet name="branding"/>
+                <f:facet name="copyright"/>
+                <f:facet name="status"/>
+                <f:attribute name="startColumnSize" value="350"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>
