@@ -186,45 +186,6 @@ A more common usage of CROSS JOIN is when we need to compare each row of a table
         except ZeroDivisionError:
             print ("Can't divide by zero!")
 
-5.1) Python Lists:
-  -List: is an ordered set of objects in Python.
-  heights = [61, 70, 67, 64]
-  -Zip: takes two (or more) lists as inputs and returns an object that contains a list of pairs.
-  names_and_heights = zip(names, heights)
-  -Append: 
-  orders = ['daisies', 'periwinkle']
-  orders.append('tulips')
-  -Plus(+): to combine 2 lists
-  items_sold = ['cake', 'cookie', 'bread']
-  items_sold_new = items_sold + ['biscuit', 'tart']
-  -Range: 
-  range(0, 10)
-  >>> print(list(my_range))
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  >>> my_list = range(2, 9)
-  >>> print(list(my_list))
-  [2, 3, 4, 5, 6, 7, 8]
-  >>> my_range2 = range(2, 9, 2)
-  >>> print(list(my_range2))
-  [2, 4, 6, 8]
-  -Length: number of items in a list
-  len(my_list)
-  -Slicing Lists:
-  list[start:end]
-  -Count:
-  letters=['a', 'b', 'b', 'd']
-  letter.count('b')
-  -Sort:
-  names = ['Xander', 'Buffy', 'Angel', 'Willow', 'Giles']
-  names.sort()
-  print(names)
-  >>> ['Angel', 'Buffy', 'Giles', 'Willow', 'Xander']
-  -Sorted:
-  games = ['Portal', 'Minecraft', 'Pacman', 'Tetris', 'The Sims', 'Pokemon']
-  games_sorted=sorted(games)
-  print(games_sorted)
-  >>> ['Minecraft', 'Pacman', 'Pokemon', 'Portal', 'Tetris', 'The Sims']
-
 5.2) Python Loops
   -For Loop: lets us perform an action on each item in a list.
   for <temporary variable> in <list variable>:
@@ -306,3 +267,250 @@ Codecademy: Python
       handle_true()
     else:
       handle_false()
+
+
+
+PL/SQL Tutorial
+===============
+  -PL/SQL 
+  Procedural language extension for SQL
+
+  -PL/SQL block
+  DECLARE
+    variable declaration
+  BEGIN (mandatory)
+    program execution
+  EXCEPTION
+    Exception reading
+  END;
+
+  -PL/SQL Placeholders
+    -PL/SQL variables
+      variable_name datatype [NOT NULL := value];
+      Ex:
+      DECLARE
+        salary number(4);
+        dept varchar2(10) NOT NULL := "HR Dept";  #must be initialized when using NOT NULL
+      Assign values:
+        1) variable_name := value; #Direct assignment
+        2) SELECT column_name      #Database assignment
+             INTO variable_name
+             FROM table_name
+           [WHERE condition];
+    -PL/SQL Constants
+      constant_name CONSTANT datatype := VALUE;
+      DECLARE
+        salary_increase CONSTANT number(3) := 17;
+    -PL/SQL Records
+      Declaring a record:
+        TYPE record_type_name IS RECORD         #Define a composite datatype, where each field is scalar.
+        (column_name1 datatype,
+         column_name2 datatype, ...);
+        col_name table_name.column_name%type;   #Dynamically define the datatype of a column based on a database column.
+        record_name record_type_name;           #Declare a record based on a user-defined type.
+        record_name table_name%ROWTYPE;         #Dynamically declare a record based on an entire row of a table. Each column in the table corresponds to a field in the record.
+      Assign values:
+        record_name.col_name := value;          #To directly assign a value to a specific column of a record.
+        record_name.column_name := value;       #To directly assign a value to a specific column of a record, if the record is declared using %ROWTYPE.
+        SELECT col1, col2                       #To assign each field of a record from the database table.
+          INTO record_name.col_name1,
+               record_name.column_name2
+          FROM table_name
+        [WHERE clause];
+        SELECT *                                #To assign values to all fields in the record from a database table.
+          INTO record_name
+          FROM table_name
+        [WHERE clause];
+      Retrieve values:
+        variable_name := record_name.col_name;  #To get a value from a record column and assigning it to a variable.
+
+    -PL/SQL Conditional Statements
+      IF condition1 THEN
+          statement1;
+      ELSIF condition2 THEN
+          statement2;
+      ELSIF condition3 THEN
+          statement3;
+      ELSE
+          statement4;
+      END IF;
+
+    -PL/SQL Iterative Statements
+      1) Simple LOOP
+      2) WHILE LOOP
+      3) FOR LOOP
+
+      1) Simple LOOP (repeat-until):
+          LOOP
+            statements;
+            EXIT;       #No repetitions
+            {or EXIT WHEN condition}  #most likely the one to be used
+          END LOOP;
+
+      2) WHILE LOOP
+          WHILE <condition>
+            LOOP
+              statements
+          END LOOP;
+          
+      3) FOR LOOP
+          FOR counter IN val1 .. val2
+            LOOP
+              statements
+          END LOOP;
+         for(int i=0; i< size; i=i*3)
+
+    -PL/SQL Cursors:
+     "A cursor is a temporary work area created in the system memory when a SQL statement is executed."
+     "A cursor contains information on a select statement and the rows of data accessed by it."
+      1) Implicit Cursors
+          DECLARE
+            var_rows NUMBER(5);
+          BEGIN
+            UPDATE employee
+            SET salary:=salary+1000;
+            IF SQL%NOTFOUND THEN
+              dbms_output.put_line('None of the salaries were updated');
+            ELSIF SQL%FOUND THEN
+              var_rows:=SQL%ROWCOUNT;
+              dbms_output.put_line('Salaries for ' || var_rows || 'employees are updated');
+            END IF;
+          END;
+      2) Explicit Cursors:
+          "An explicit cursor is defined in the declaration section of the PL/SQL Block."
+          Attributes: %FOUND, %NOTFOUND, %ROWCOUNT, %ISOPEN
+          CURSOR cursor_name IS select_statement;
+
+          "General form of using an explicit cursor is:"
+          DECLARE
+            variables;
+            records;
+            create a cursor;
+          BEGIN
+            OPEN cursor;
+            FETCH cursor;
+              process the records;  #A LOOP can be used here
+            CLOSE cursor;
+          END;
+
+          "Ex:"
+          DECLARE
+            emp_rec emp_tbl%rowtype;
+            CURSOR emp_cur IS
+            SELECT *
+            FROM employee
+            WHERE salary>10;
+          BEGIN
+            OPEN emp_cur;
+            FETCH emp_cur INTO emp_rec;
+              dbms_output.put_line(emp_rec.first_name || " " || emp_rec.last_name);
+            CLOSE emp_cur;
+          END;
+
+          "General form of using a cursor FOR LOOP:"
+          FOR record_name IN cursor_name
+          LOOP
+            process the row...
+          END LOOP;
+
+          "Ex:"
+          DECLARE
+            CURSOR employees_in_10_cur IS
+              SELECT *
+              FROM employees
+              WHERE department_id=10;
+          BEGIN
+            FOR employee_rec IN employees_in_10_cur
+            LOOP
+              DBMS_OUTPUT.PUT_LINE(employee_rec.last_name);
+            END LOOP;
+          END; 
+          "The nice thing about the cursor FOR loop is that ORACLE Database opens the cursor, declares a record by using %ROWTYPE against the cursor, "
+          "fetches each row into a record, and then closes the loop when all the rows have been fetched (or the loop terminates for any other reason)."
+
+    -PL/SQL Procedures:
+      "General syntax to create a procedure:"
+      CREATE [OR REPLACE] PROCEDURE proc_name (list_of_parameters)
+      IS                      #Same as DECLARE in anonymous PL/SQL Blocks
+        declaration_section
+      BEGIN
+        execution_section
+      EXCEPTION
+        exception_section
+      END;
+
+      "Ex:"
+      CREATE OR REPLACE PROCEDURE employer_details IS
+        CURSOR emp_cur IS
+          SELECT first_name, last_name, salary
+          FROM emp_tbl;
+      BEGIN
+        FOR emp_rec IN emp_cur
+        LOOP
+          dbms_output.put_line(emp_cur.first_name || ' ' || emp_cur.last_name || ' ' || emp_cur.salary);
+        END LOOP;
+      END;
+
+    -PL/SQL Functions:
+      "A stored function is a set of PL/SQL statements you can call by name. Stored functions are very similar to procedures, "
+      "except that a function return a value to the environment in which it is called. User functions can be used as part of a SQL expression."
+      "The major difference between a procedure and a function is, a function must return a value, but a procedure may or may not."
+
+      "General syntax to write a function:"
+      CREATE [OR REPLACE] FUNCTION function_name (parameters)
+      RETURN return_datatype;   #Any ORACLE datatype: varchar2, number, etc...
+      IS
+        declaration_section
+      BEGIN
+        execution_section
+        RETURN return_variable;
+      EXCEPTION                 #A value must be returned here as well (if this section is included)
+        exception_section
+        RETURN return_variable;
+      END;
+
+    -PL/SQL Parameters in PROCEDURES and FUNCTIONS:
+      1) IN
+          "IN - is optional, by default it is a IN type parameter."
+          "It can be assigned to a variable or be used in a query."
+          "READ-ONLY parameter. Its value cannot be changed inside the procedure."
+      2) OUT
+          "WRITE-ONLY parameter. Pass by 'value' method."
+          "A default value cannot be assigned to the OUT parameter."
+          "Values can be assigned inside the stored procedure."
+      3) IN OUT
+          "Values can be passed and returned to the calling program."
+          "Procedure and output value must have the same datatype."
+
+    -PL/SQL Exception Handling:
+      1) What is Exception Handling?
+          "A feature provided by PL/SQL in order to handle Exceptions"
+      2) Structure of Exception Handling?
+          "General Syntax for coding the exception section: "
+          DECLARE
+            declaration_section
+          BEGIN
+            execution_section
+          EXCEPTION
+            WHEN ex_name1 THEN
+              error_handling_statements
+            WHEN ex_name2 THEN
+              error_handling_statements
+            WHEN Others THEN
+              error_handling_statements
+          END;
+      3) Exception Types:
+          a) Named System Exceptions:
+              "Not declared explicitly"
+              "Raised implicitly when a predefined ORACLE error occurs"
+              "Ex: CURSOR_ALREADY_OPEN, NO_DATA_FOUND, ZERO_DIVIDE, etc..."
+              "Ex:"
+              BEGIN
+                execution_section
+              EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                  dbms_output.put_line('A SELECT...INTO did not return any row.');
+              END;
+          b) Unnamed System Exceptions:
+              ""
+          c) User-defined Exceptions:
