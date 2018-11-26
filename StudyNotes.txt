@@ -512,5 +512,57 @@ PL/SQL Tutorial
                   dbms_output.put_line('A SELECT...INTO did not return any row.');
               END;
           b) Unnamed System Exceptions:
-              ""
+              "A system exception for which ORACLE doesn't provide a name."
+              "Raised implicitly. If not handled in WHEN Others, they must be handled explicityly."
           c) User-defined Exceptions:
+              "Exceptions defined based on business rules"
+
+      RAISE_APPLICATION_ERROR()
+      "Built-in procedure used to display the user-defined error messages along with the error number whose range is in between -20000 and -20999."
+      "It is used for the following reasons:"
+        "a) Create an unique id for an user-defined exception"
+        "b) Make the user-defined exception look like an Oracle error"
+
+    -PL/SQL Triggers:
+      "A trigger is a PL/SQL block structure which is fired when a DML statement like INSERT, UPDATE, DELETE are executed on a table"
+      "Ex:"
+      CREATE [OR REPLACE] TRIGGER trigger_name
+      {BEFORE | AFTER | INSTEAD OF}
+      {INSERT [OR] | UPDATE [OR] | DELETE}
+      [OF col_name]   #used with update triggers
+      ON table_name
+      [REFERENCING OLD AS o NEW AS n]
+      [FOR EACH ROW]  #determines which kind of trigger gets fired
+      WHEN(condition) #valid only for row-leve triggers
+      BEGIN
+        sql_statements
+      END;
+
+      Types of PL/SQL Triggers:
+      1) "Row-level trigger: An event is triggered for every row updated, inserted or deleted."
+      2) "Statement-level trigger: An event is triggered for each sql statement executed."
+
+
+
+Oracle PL.SQL - Curso PC
+========================
+  -Operadores PL-SQL:
+    1) Arithmetic: +, -, *, /, **(exp)        
+    2) Relational: =, <> or !=, <, <=, >, >=
+    3) Comparison: LIKE, BETWEEN, IN, IS NULL
+    4) Logic: AND, OR, NOT
+    5) Chain: ||(concatenation)
+  
+  -CASE statement:
+    1) "simple_case_statement:"
+       [ <<labe_name>> ]
+       CASE case_operand
+       { WHEN when_operand THEN {statement;} ... }...
+       [ ELSE {statement;}... ]
+       END CASE [ labe_name ]
+    1) "searched_case_statement:"
+       [ <<labe_name>> ]
+       CASE { WHEN boolean_expression THEN {statement;} ... }...
+       [ ELSE {statement;}... ]
+       END CASE [ labe_name ]
+      
