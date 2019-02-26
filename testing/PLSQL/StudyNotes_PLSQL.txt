@@ -1,0 +1,88 @@
+PL/SQL
+======
+
+////////////////////
+CH.2: Bloques PL-SQL
+////////////////////
+
+--PL/SQL ANONYMOUS BLOCK
+-->>>>>>>>>>>>>>>>>>>>>>
+DECLARE --optional
+BEGIN
+  NULL;
+--EXCEPTION --optional
+END;
+
+--DBMS OUTPUT
+-->>>>>>>>>>>
+SET SERVEROUTPUT ON;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('hELLO Sekai!!');
+END;
+
+--Variables
+-->>>>>>>>>
+DECLARE
+  X NUMBER(5);
+  ZETA VARCHAR2(100):='KORE HA TESTO DAKEDO...';
+  RESULTADO VARCHAR2(100);
+BEGIN
+  X:=12;
+  DBMS_OUTPUT.PUT_LINE(X*90);
+  DBMS_OUTPUT.PUT_LINE(ZETA);
+  RESULTADO:=X||' ' || ZETA;
+  DBMS_OUTPUT.PUT_LINE(RESULTADO);
+END;
+
+--Variables PL/SQL
+-->>>>>>>>>>>>>>>>
+DECLARE
+  NAMAE VARCHAR2(100);
+  MIOJI VARCHAR2(100);
+BEGIN
+  NULL;
+  SELECT FIRST_NAME, LAST_NAME INTO NAMAE, MIOJI FROM EMPLOYEES WHERE EMPLOYEE_ID=100;
+  DBMS_OUTPUT.PUT_LINE(NAMAE || ' ' || MIOJI);
+END;
+
+//////////////
+CH.3: Commands
+//////////////
+
+--Nested Blocks
+-->>>>>>>>>>>>>
+"Labeled Block"
+<<testblock>>
+DECLARE
+  n NUMBER(5);
+BEGIN  
+  <<nestedblock>>
+  DECLARE
+    n NUMBER(5);
+  BEGIN
+    n:=20;
+    testblock.n:=50;
+    dbms_output.put_line('n: '||n);
+    dbms_output.put_line('testblock.n: '||testblock.n);
+  END;
+END;
+
+--Comments & Literals
+-->>>>>>>>>>>>>>>>>>>
+DECLARE
+  A NUMBER;
+  B VARCHAR2(100);
+  C DATE;
+  little_bool BOOLEAN;
+BEGIN
+  --this is a single line comment
+  /*multiple 
+    line 
+    comment: like Java, Javascript, C, C++*/
+  A:=2;              --NUMBER Literal
+  B:='genki?';       --STRING Literal
+  C:='05-MAY-2006';   --DATE Literal
+  little_bool:=TRUE; --BOOLEAN Literal (can't be printed cuz there aint a similar datatype in plain SQL)
+  DBMS_OUTPUT.PUT_LINE(A||' '||B||' '||C);
+  DBMS_OUTPUT.PUT_LINE('Formatted date: '||TO_CHAR(C, 'DD/MM/YYYY'));  
+END;
