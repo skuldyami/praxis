@@ -328,7 +328,41 @@ HeadFirst Programming: Python
       *Pass parameters to functions by placing them between parentheses
 
 04) DATA IN FILES AND ARRAYS: Sort it out
-    
+    "sample_code:"
+    results_f=open("results.txt")     #open() creates a file handle
+
+    for line in results_f:
+      (name, score)=line.split()      #multiple assignment & split method
+      if float(score)>highest_score:
+        highest_score=float(score)
+    print("The higher score was: "+str(highest_score))
+    "sample_code2:"
+    >>> someones_array=[6, "23", "Cat", "hot-dog stand"]
+    >>> print(someones_array[0])
+    6
+    >>> print(someones_array[3])
+    hot-dog stand
+    >>> someones_array.append("klk")
+    >>> print(someones_array)
+    [6, '23', 'Cat', 'hot-dog stand', 'klk']
+    "Progamming Tools:"
+    *files - reading data stored on disk
+    *arrays - a collection variable that holds multiple data items that can be accessed by index
+    *sorting - arranging a collection in a specific order
+    "Python Tools:"
+    *open() - open a file for processing
+    *close() - close a file
+    *for - iterate over something
+    *string.split() - cut a string into multiple parts
+    *[] - the array index operator
+    *array.append() - add an item to the end of an array
+    *array.sort() - sort an array, lowest-to-highest
+    *array.reverse() - change the order of an array by reversing it
+
+
+
+
+
 
 PL/SQL Tutorial
 ===============
