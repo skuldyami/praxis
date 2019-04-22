@@ -359,8 +359,32 @@ HeadFirst Programming: Python
     *array.sort() - sort an array, lowest-to-highest
     *array.reverse() - change the order of an array by reversing it
 
+05) HASHES AND DATABASES: Putting data in its place
+    "sample_code:"
+    >>> scores={}
+    >>> scores[8.45]='Joseph'
+    >>> scores[9.12]='Juan'
+    >>> scores[7.21]='Zack'
+    >>> for key in scores.keys():
+    ...   print(scores[key] + ' had a score of ' + str(key))
+    ...
+    Joseph had a score of 8.45
+    Juan had a score of 9.12
+    Zack had a score of 7.21
+    "Programming Tools:"
+    *hash - a data structure that associates a name with a value
+    *s['age'] - retrieve the value associated withe the 'age' name in a hash called 's'
+    *returning a data structure from a function
+    *database system - a technology, like SQLite3, that can store large quantities of data in a very efficient way
+    "Python Tools:"
+    *{} - an empty hash
+    *s['wind']="off shore" - sets that value associated with "wind" in the "s" hash to the value "off shore"
+    *s.keys() - provide a list of keys for the hash called 's'
+    *s.items() - provide a list of keys AND values for the hash called 's'
+    *line.split(",") - split the string contained within the 'line' variable at every occurence of a comma('separator')
+    *sorted() - a built-in function that can sort most data structures
 
-
+06) MODULAR PROGRAMMING: Keeping things straight
 
 
 
