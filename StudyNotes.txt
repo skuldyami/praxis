@@ -109,8 +109,8 @@ Codecademy: Data Science
   -FOREIGN KEY: a column that contains the primary key to another table.
   -CROSS JOIN: combine all rows of one table with all rows of another table. Notice that cross joins don't require an ON statement. You're not really joining on any columns!
 A more common usage of CROSS JOIN is when we need to compare each row of a table to a list of values.
-    SELECT shirts.shirt_color,
-          pants.pants_color
+    SELECT shirts.shirt_color
+,          pants.pants_color
     FROM shirts
     CROSS JOIN pants;
   -UNION: Sometimes we just want to stack one dataset on top of the other. 1) Same number of columns. 2) Same datatype in the same order as the first table.
@@ -373,7 +373,7 @@ HeadFirst Programming: Python
     Zack had a score of 7.21
     "Programming Tools:"
     *hash - a data structure that associates a name with a value
-    *s['age'] - retrieve the value associated withe the 'age' name in a hash called 's'
+    *s['age'] - retrieve the value associated with the 'age' name in a hash called 's'
     *returning a data structure from a function
     *database system - a technology, like SQLite3, that can store large quantities of data in a very efficient way
     "Python Tools:"
@@ -387,6 +387,11 @@ HeadFirst Programming: Python
 06) MODULAR PROGRAMMING: Keeping things straight
 
 
+MATHEMAGICS
+===========
+  00) -Instant Mult. by 11
+      -Square nums ending with 5, add to 10
+      -Day for a date: January 1st
 
 PL/SQL Tutorial
 ===============
